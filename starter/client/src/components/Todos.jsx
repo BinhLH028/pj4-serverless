@@ -28,7 +28,7 @@ export function Todos() {
   function renderTodosList() {
     return (
       <Grid padded>
-        {todos.map((todo, pos) => {
+        {todos && todos.map((todo, pos) => {
           return (
             <Grid.Row key={todo.todoId}>
               <Grid.Column width={1} verticalAlign="middle">
@@ -77,7 +77,7 @@ export function Todos() {
   async function onTodoDelete(todoId) {
     try {
       const accessToken = await getAccessTokenSilently({
-        audience: `https://test-endpoint.auth0.com/api/v2/`,
+        audience: `https://dev-65kft6imt5ozyylh.us.auth0.com/api/v2/`,
         scope: 'delete:todo'
       })
       await deleteTodo(accessToken, todoId)
@@ -91,7 +91,7 @@ export function Todos() {
     try {
       const todo = todos[pos]
       const accessToken = await getAccessTokenSilently({
-        audience: `https://test-endpoint.auth0.com/api/v2/`,
+        audience: `https://dev-65kft6imt5ozyylh.us.auth0.com/api/v2/`,
         scope: 'write:todo'
       })
       await patchTodo(accessToken, todo.todoId, {
@@ -128,7 +128,7 @@ export function Todos() {
     async function foo() {
       try {
         const accessToken = await getAccessTokenSilently({
-          audience: `https://test-endpoint.auth0.com/api/v2/`,
+          audience: `https://dev-65kft6imt5ozyylh.us.auth0.com/api/v2/`,
           scope: 'read:todos'
         })
         console.log('Access token: ' + accessToken)

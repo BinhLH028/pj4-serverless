@@ -13,7 +13,7 @@ export async function getTodos(idToken) {
     }
   )
   console.log('Todos:', response.data)
-  return response.data.items
+  return response.data
 }
 
 export async function createTodo(idToken, newTodo) {
@@ -63,7 +63,8 @@ export async function getUploadUrl(idToken, todoId) {
       }
     }
   )
-  return response.data.uploadUrl
+  console.log(response.data);
+  return response.data.url
 }
 
 export async function uploadFile(uploadUrl, file) {

@@ -12,17 +12,26 @@ export function NewTodoInput({ onNewTodo }) {
   const onTodoCreate = async (event) => {
     try {
       const accessToken = await getAccessTokenSilently({
-        audience: `https://test-endpoint.auth0.com/api/v2/`,
+        audience: `https://dev-65kft6imt5ozyylh.us.auth0.com/api/v2/`,
         scope: 'write:todos'
       })
+      
       const dueDate = calculateDueDate()
+      
+      // Check if newTodoName is defined
+      if (!newTodoName) {
+        throw new Error('Todo name is required.')
+      }
+  
+      console.log(accessToken + " -- " + newTodoName)
+      
       const createdTodo = await createTodo(accessToken, {
         name: newTodoName,
         dueDate
       })
       onNewTodo(createdTodo)
     } catch (e) {
-      console.log('Failed to created a new TODO', e)
+      console.log('Failed to create a new TODO', e)
       alert('Todo creation failed')
     }
   }
